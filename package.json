@@ -1,7 +1,7 @@
 {
-  "name": "project",
+  "name": "bnav",
   "version": "1.0.0",
-  "description": "Project",
+  "description": "Battle Navigation",
   "main": "src/app.js",
   "private": true,
   "scripts": {
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/[account]/[project].git"
+    "url": "git+https://github.com/hookbot/bnav.git"
   },
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
-    "url": "https://github.com/[account]/[project]/issues"
+    "url": "https://github.com/hookbot/bnav/issues"
   },
-  "homepage": "https://github.com/[account]/[project]#readme",
+  "homepage": "https://github.com/hookbot/bnav#readme",
   "dependencies": {
     "lodash": "^4.17.10",
     "phaser": "^3.12.0",
