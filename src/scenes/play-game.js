@@ -2,6 +2,9 @@ import io from 'socket.io-client';
 
 import gameConfig from '../../config/game.json';
 
+import PlayerSelf from '../actors/player/self';
+import PlayerOther from '../actors/player/other';
+
 export default class PlayGameScene extends Phaser.Scene {
     constructor (config, key = 'PlayGame') {
         super({ key: key });
@@ -16,6 +19,8 @@ export default class PlayGameScene extends Phaser.Scene {
         this.load.image('brownBox', 'brown_box.png');
         this.load.image('lightBox', 'highlight_box.png');
         this.load.image('cancel', 'red_x.png');
+        this.load.atlas('blueboy', 'blueboy.png', 'blueboy.json');
+        this.load.atlas('redboy', 'redboy.png', 'redboy.json');
         // load all the resources required for this scene before using them
     }
 
@@ -46,6 +51,9 @@ export default class PlayGameScene extends Phaser.Scene {
         });
 
         this.setupMap();
+
+        this.playerSelf = new PlayerSelf(this, 100, 100);
+        this.add.existing(this.playerSelf);
     }
 
     setupMap () {

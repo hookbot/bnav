@@ -5,7 +5,6 @@ import MapCell from './map-cell';
 import MapEntityPlayer from './map-entity/player';
 import MapEntityWall from './map-entity/wall';
 import MapEntityWater from './map-entity/water';
-import User from './user';
 
 class Map {
     constructor () {
