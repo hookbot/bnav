@@ -27,6 +27,11 @@ class Server {
         this.webSocketServer.on('connection', (socket) => {
             let id = socket.conn.id;
             console.log('[' + id + '] User connected!');
+            Object.values(this.connections).forEach((c) => {
+                if (c.userName) {
+                    c.socket.emit('serverReport', c.userName + ' just logged in! Welcome!');
+                }
+            });
 
             this.connections[id] = { socket: socket };
 
