@@ -10,9 +10,6 @@ start: node_modules
 stop:
 	killall npm webpack-serve node
 
-start-server: node_modules
-	node server/index.js
-
 dist:
 	npm run dist </dev/null
 
