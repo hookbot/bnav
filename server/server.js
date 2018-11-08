@@ -37,6 +37,16 @@ class Server {
 
             socket.on('sendMessage', (message) => {
                 console.log('[' + id + '] sendMessage: ' + message);
+                if (this.connections[id].userName) {
+                    Object.values(this.connections).forEach((c) => {
+                        if (c.userName) {
+                            c.socket.emit('serverReport', '[' + this.connections[id].userName + '] ' + message);
+                        }
+                    });
+                }
+                else {
+                    socket.emit('serverReport', 'ERROR! You first need to login using /login');
+                }
             });
 
             socket.on('doLogin', (userName) => {
