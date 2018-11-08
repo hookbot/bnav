@@ -8,6 +8,7 @@ require('./index.html'); // so we get it in the dist
 import LoadingScene from './scenes/loading';
 import MainMenuScene from './scenes/main-menu';
 import PlayGameScene from './scenes/play-game';
+import DashboardScene from './scenes/dashboard';
 
 var gameConfig = {
     type: Phaser.AUTO,
@@ -21,7 +22,7 @@ var gameConfig = {
             //debug: true, // enable to see physics bodies outlined
         }
     },
-    scene: [LoadingScene, MainMenuScene, PlayGameScene]
+    scene: [LoadingScene, MainMenuScene, PlayGameScene, DashboardScene]
 }
 
 let game = new Phaser.Game(gameConfig);
