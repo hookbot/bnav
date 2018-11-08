@@ -1,5 +1,5 @@
 import Map from './game/map';
-import Player from './game/player';
+import User from './game/user';
 
 class Game {
     constructor (webSocketServer) {
@@ -7,13 +7,13 @@ class Game {
 
         this.map = new Map();
 
-        this.players = {};
+        this.users = {};
     }
 
-    addPlayer (userName) {
-        if (this.players[userName]) throw `Player, ${userName} already exists in game.`;
+    addUser (userName) {
+        if (this.users[userName]) throw `User, ${userName} already exists in game.`;
 
-        this.players[userName] = new Player(userName);
+        this.users[userName] = new User(userName);
     }
 }
 
