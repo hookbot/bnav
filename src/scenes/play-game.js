@@ -141,6 +141,7 @@ export default class PlayGameScene extends Phaser.Scene {
 
     appendServerStatus (message) {
         this.game.serverStatus.value = this.game.serverStatus.value + '\n' + message;
+        this.game.serverStatus.scrollTop = this.game.serverStatus.scrollHeight;
     };
 
 };
