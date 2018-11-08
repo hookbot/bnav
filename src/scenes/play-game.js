@@ -24,6 +24,7 @@ export default class PlayGameScene extends Phaser.Scene {
         this.game.appMessage.addEventListener('keypress', (e) => this.handleAppMessageKey(e));
         // Catch ServerStatus
         this.game.serverStatus = document.getElementById('server_status');
+        this.game.actionQueue = [];
     }
 
     create () {
@@ -61,26 +62,41 @@ export default class PlayGameScene extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
 
         let dashboard = this.add.container(0, 400);
+
         var rect = new Phaser.Geom.Rectangle(0, 0, 400, 200);
-
         var graphics = this.add.graphics({ fillStyle: { color: 0xFFD733 } });
-
         graphics.fillRectShape(rect);
         dashboard.add(graphics);
+
         dashboard.add(this.add.image(50, 150, 'turn_arrows', 'clockwise_turn').setScale(2).setInteractive().on('pointerdown', () => this.handleDashboardButton('clockwise') ));
         dashboard.add(this.add.image(90, 150, 'turn_arrows', 'counter_clockwise_turn').setScale(2));
         dashboard.add(this.add.image(130, 150, 'move_arrows', 'left_arrow').setScale(2));
         dashboard.add(this.add.image(170, 150, 'move_arrows', 'up_arrow').setScale(2));
         dashboard.add(this.add.image(210, 150, 'move_arrows', 'down_arrow').setScale(2));
         dashboard.add(this.add.image(250, 150, 'move_arrows', 'right_arrow').setScale(2));
+        
         dashboard.setSize(400, 200);
+
+        dashboard.add(this.add.image(300, 50, 'brownBox').setInteractive().on('pointerdown', () => this.handleActionQueue(0)));
+
     }
 
     update () {
     }
 
     handleDashboardButton (buttonType) {
+        if (this.game.activeButton == buttonType) {
+            this.game.activeButton = false;
+        }
+        else {
+            this.game.activeButton = buttonType;
+        }
         console.log(buttonType);
+    }
+
+    handleActionQueue(actionLocation) {
+        this.game.actionQueue[actionLocation] = this.game.activeButton;
+        console.log(this.game.actionQueue);
     }
 
     handleAppMessageKey(e) {
