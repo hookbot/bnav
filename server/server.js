@@ -83,6 +83,18 @@ class Server {
                 }
             });
 
+            socket.on('doLogout', () => {
+                if (this.connections[id].userName) {
+                    console.log('[' + this.connections[id].userName + '] doLogout: ' + this.connections[id].userName);
+                    socket.emit('serverReport', this.connections[id].userName + ', you have been logged out!');
+                    delete this.connections[id].userName;
+                }
+                else {
+                    console.log('[' + id + '] Ignoring logout attempt because not logged in!');
+                    socket.emit('serverReport', 'Sorry, you are not logged in.');
+                }
+            });
+
             socket.emit('yourID', id);
         });
     }
