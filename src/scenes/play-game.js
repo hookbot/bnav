@@ -13,7 +13,8 @@ export default class PlayGameScene extends Phaser.Scene {
         this.load.atlas('move_arrows', 'move_arrows.png', 'move_arrows.json');
         this.load.atlas('turn_arrows', 'turn_arrows.png', 'turn_arrows.json');
         this.load.atlas('shield', 'shield.png', 'shield.json');
-        this.load.image('brownBox', 'brownbox.png');
+        this.load.image('brownBox', 'brown_box.png');
+        this.load.image('lightBox', 'highlight_box.png');
         // load all the resources required for this scene before using them
     }
 
