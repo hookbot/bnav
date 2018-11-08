@@ -17,7 +17,7 @@ export default class PlayGameScene extends Phaser.Scene {
 
     create () {
         this.socket = io('http://localhost:8000/');
-        this.socket.on('yourID', function (id) {
+        this.socket.on('yourID', function (playerID) {
             console.log('yourID:', playerID);
             this.playerID = playerID;
         });
