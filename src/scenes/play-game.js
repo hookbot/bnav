@@ -1,5 +1,7 @@
 import io from 'socket.io-client';
 
+import gameConfig from '../../config/game.json';
+
 export default class PlayGameScene extends Phaser.Scene {
     constructor (config, key = 'PlayGame') {
         super({ key: key });
@@ -38,12 +40,12 @@ export default class PlayGameScene extends Phaser.Scene {
         this.tilemap = this.make.tilemap({ key: 'map' });
         this.tilesets = {};
         gameConfig.map.tilesets.forEach(tileset => {
-            this.tilesets[tileset.key] = this.tileMap.addTilesetImage(tileset.key);
+            this.tilesets[tileset.key] = this.tilemap.addTilesetImage(tileset.key);
         });
 
         this.tileLayers = {};
         gameConfig.map.tileLayers.forEach(layer => {
-            this.tileLayers[layer.name] = this.tileMap.createDynamicLayer(layer.name, this.tilesets[layer.tileset], 0, 0);
+            this.tileLayers[layer.name] = this.tilemap.createDynamicLayer(layer.name, this.tilesets[layer.tileset], 0, 0);
         });
 
         this.physics.world.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);

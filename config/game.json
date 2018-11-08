@@ -1,0 +1,29 @@
+{
+    "gameHeight": 600,
+    "gameWidth": 800,
+    "tileHeight": 16,
+    "tileWidth": 16,
+    "map": {
+        "tilesets": [
+            {
+                "key": "tileset",
+                "file": "Rob_Tileset.png"
+            }
+        ],
+        "tileLayers": [
+            {
+                "name": "Floor",
+                "tileset": "tileset"
+            },
+            {
+                "name": "Water",
+                "tileset": "tileset"
+            },
+            {
+                "name": "Wall",
+                "tileset": "tileset"
+            }
+        ]
+
+    }
+}
