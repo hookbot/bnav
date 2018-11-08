@@ -19,6 +19,8 @@ export default class PlayGameScene extends Phaser.Scene {
         // Catch AppMessage Input
         this.game.appMessage = document.getElementById('app_message');
         this.game.appMessage.addEventListener('keypress', (e) => this.handleAppMessageKey(e));
+        // Catch ServerStatus
+        this.game.serverStatus = document.getElementById('server_status');
     }
 
     create () {
@@ -30,9 +32,11 @@ export default class PlayGameScene extends Phaser.Scene {
         this.socket.on('yourUserName', (userName) => {
             console.log('yourUserName:', userName);
             this.userName = userName;
+            this.appendServerStatus('You are logged in as: ' + userName);
         });
         this.socket.on('serverReport', (line) => {
             console.log('SERVER: ' + line);
+            this.appendServerStatus(line);
         });
 
         this.setupMap();
@@ -111,4 +115,9 @@ export default class PlayGameScene extends Phaser.Scene {
             }
         }
     }
+
+    appendServerStatus (message) {
+        this.game.serverStatus.value = this.game.serverStatus.value + '\n' + message;
+    };
+
 };
