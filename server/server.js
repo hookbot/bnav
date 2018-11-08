@@ -54,6 +54,8 @@ class Server {
 
             socket.on('doLogin', (userName) => {
                 console.log('[' + id + '] doLogin: ' + userName);
+                if (!userName || userName == null || userName == undefined)
+                    return;
                 if (this.connections[id].userName) {
                     console.log('[' + this.connections[id].userName + '] Ignoring relogin attempt as ' + userName);
                     socket.emit('serverReport', 'You are already logged in as ' + this.connections[id].userName);
