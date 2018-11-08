@@ -65,14 +65,12 @@ export default class PlayGameScene extends Phaser.Scene {
             var contents = message.split(" ");
             this.game.appMessage.value = '';
             if (contents[0] == '/login') {
-                this.game.appMessage.value = '';
                 if (contents[1]) {
                     console.log("LOGIN AS USER: " + contents[1]);
                     this.socket.emit('doLogin', contents[1]);
                 }
             }
             else if (contents[0] == '/logout') {
-                this.game.appMessage.value = '';
                 if (this.userName) {
                     console.log('LOGOUT!');
                     this.socket.emit('doLogout');
