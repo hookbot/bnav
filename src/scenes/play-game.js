@@ -7,6 +7,7 @@ export default class PlayGameScene extends Phaser.Scene {
 
     preload () {
         this.load.tilemapTiledJSON('map', 'test-map.json');
+        this.load.image('tileset', 'Rob_Tileset.png');
         // load all the resources required for this scene before using them
     }
 
