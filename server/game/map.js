@@ -15,7 +15,7 @@ class Map {
         this.mapConfigWallsLayer = null;
         this.mapConfigWaterLayer = null
 
-        // todo: find map config wall and water layers
+        // find map config wall and water layers
         this.mapConfig.layers.forEach(layer => {
             switch(layer.name) {
                 case 'Wall':
@@ -40,12 +40,36 @@ class Map {
         this.walls = [];
         this.water = [];
 
-        // todo: create map with map cells filled with walls and water entities 
+        // create map with map cells filled with walls and water entities
+        for (let x = 0; x < this.width; x++) {
+            for (let y = 0; y < this.height; y++) {
+                let index = this.calcMapIndex(x, y);
+                let mapCell = new MapCell(x, y);
+
+                if (this.mapConfigWallsLayer.data[index] > 0) {
+                    let wall = new MapEntityWall(x, y);
+
+                    this.walls.push(wall);
+
+                    mapCell.addEntity(wall);
+                }
+
+                if (this.mapConfigWaterLayer.data[index] > 0) {
+                    let water = new MapEntityWater(x, y);
+
+                    this.water.push(water);
+
+                    mapCell.addEntity(water);
+                }
+
+                this.map[index] = mapCell;
+            }
+        } 
     }
 
-    get width () { return this.map.width; }
+    get width () { return this.mapConfig.width; }
 
-    get height () { return this.map.height; }
+    get height () { return this.mapConfig.height; }
 
     calcMapIndex (x, y) { return x + this.width * y; }
 
