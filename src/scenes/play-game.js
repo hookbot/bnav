@@ -10,6 +10,8 @@ export default class PlayGameScene extends Phaser.Scene {
     preload () {
         this.load.tilemapTiledJSON('map', 'test-map.json');
         this.load.image('Rob_Tileset', 'Rob_Tileset.png');
+        this.load.atlas('move_arrows', 'move_arrows.png', 'move_arrows.json');
+        this.load.atlas('turn_arrows', 'turn_arrows.png', 'turn_arrows.json');
         // load all the resources required for this scene before using them
     }
 
@@ -50,6 +52,21 @@ export default class PlayGameScene extends Phaser.Scene {
 
         this.physics.world.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
         this.cameras.main.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
+
+        let dashboard = this.add.container();
+        var rect = new Phaser.Geom.Rectangle(0, 0, 400, 200);
+
+        var graphics = this.add.graphics({ fillStyle: { color: 0x0000ff } });
+
+        graphics.fillRectShape(rect);
+        dashboard.add(graphics);
+        dashboard.add(this.add.image(50, 150, 'turn_arrows', 'clockwise_turn').setScale(2));
+        dashboard.add(this.add.image(90, 150, 'turn_arrows', 'counter_clockwise_turn').setScale(2));
+        dashboard.add(this.add.image(130, 150, 'move_arrows', 'left_arrow').setScale(2));
+        dashboard.add(this.add.image(170, 150, 'move_arrows', 'up_arrow').setScale(2));
+        dashboard.add(this.add.image(210, 150, 'move_arrows', 'down_arrow').setScale(2));
+        dashboard.add(this.add.image(250, 150, 'move_arrows', 'right_arrow').setScale(2));
+        dashboard.setSize(400, 200);
     }
 
     update () {

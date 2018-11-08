@@ -11,6 +11,10 @@
 require('../../assets/json/test-map.json');
 require('../../assets/images/Rob_Tileset.png');
 require('../../assets/images/play.png');
+require('../../assets/images/move_arrows.png');
+require('../../assets/json/move_arrows.json');
+require('../../assets/images/turn_arrows.png');
+require('../../assets/json/turn_arrows.json');
 
 export default class LoadingScene extends Phaser.Scene {
     constructor (config, key = 'Loading') {

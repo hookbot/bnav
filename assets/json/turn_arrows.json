@@ -1,1 +1,54 @@
-{"frames":{"turn_arrows0.png":{"frame":{"x":0,"y":0,"w":16,"h":16},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":16,"h":16},"sourceSize":{"w":16,"h":16}},"turn_arrows1.png":{"frame":{"x":16,"y":0,"w":16,"h":16},"rotated":false,"trimmed":false,"spriteSourceSize":{"x":0,"y":0,"w":16,"h":16},"sourceSize":{"w":16,"h":16}}},"meta":{"app":"https://github.com/piskelapp/piskel/","version":"1.0","image":"turn_arrows.png","format":"RGBA8888","size":{"w":32,"h":16}}}
+{
+    "frames": {
+        "counter_clockwise_turn": {
+            "frame": {
+                "h": 16,
+                "w": 16,
+                "x": 0,
+                "y": 0
+            },
+            "rotated": false,
+            "sourceSize": {
+                "h": 16,
+                "w": 16
+            },
+            "spriteSourceSize": {
+                "h": 16,
+                "w": 16,
+                "x": 0,
+                "y": 0
+            },
+            "trimmed": false
+        },
+        "clockwise_turn": {
+            "frame": {
+                "h": 16,
+                "w": 16,
+                "x": 16,
+                "y": 0
+            },
+            "rotated": false,
+            "sourceSize": {
+                "h": 16,
+                "w": 16
+            },
+            "spriteSourceSize": {
+                "h": 16,
+                "w": 16,
+                "x": 0,
+                "y": 0
+            },
+            "trimmed": false
+        }
+    },
+    "meta": {
+        "app": "https://github.com/piskelapp/piskel/",
+        "format": "RGBA8888",
+        "image": "turn_arrows.png",
+        "size": {
+            "h": 16,
+            "w": 32
+        },
+        "version": "1.0"
+    }
+}
