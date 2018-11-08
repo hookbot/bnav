@@ -13,7 +13,11 @@ class Game {
     addUser (userName) {
         if (this.users[userName]) throw `User, ${userName} already exists in game.`;
 
-        this.users[userName] = new User(userName);
+        let user = new User(userName);
+
+        this.users[userName] = user;
+
+        this.map.addNewUserToMap(user);
     }
 }
 

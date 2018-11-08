@@ -75,10 +75,38 @@ class Map {
 
     findRandomEmptyMapCell () {
         // todo: while ! found and tries < 100 generate random Int and see if cell is empty
+        let found = false;
+        let tries = 0;
+        let foundMapCell = null;
+        let minIndex = 0;
+        let maxIndex = this.width * this.height;
+
+        while (!found && tries < 100) {
+            let randIndex = Math.floor(Math.random() * (maxIndex - minIndex));
+            let mapCell = this.map[randIndex];
+            if (mapCell.entities.length === 0) {
+                foundMapCell = mapCell;
+                found = true;
+            }
+            tries++;
+        }
+
+        if (foundMapCell == null) throw `could not find empty map cell!`;
+
+        return foundMapCell;
     }
 
     addNewUserToMap (user) {
-        // todo: generate a player map entity in a random empty cell
+        // generate a player map entity in a random empty cell
+        let emptyMapCell = this.findRandomEmptyMapCell();
+
+        let player = new MapEntityPlayer(emptyMapCell.x, emptyMapCell.y, user);
+
+        emptyMapCell.addEntity(player);
+
+        this.players.push(player);
+
+        user.player = player;
     }
 }
 
