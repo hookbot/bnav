@@ -35,6 +35,11 @@ class Server {
 
             socket.on('disconnect', () => {
                 console.log('[' + id + '] User disconnected!');
+                if (this.connections[id].userName) {
+                    console.log('[' + id + '] DISCONNECT: ' + this.connections[id].userName);
+                    this.game.removePlayer(this.connections[id].userName);
+                    delete this.connections[id].userName;
+                }
                 delete this.connections[id];
             });
 
@@ -78,9 +83,7 @@ class Server {
                             }
                         });
                         this.connections[id].userName = userName;
-
                         this.game.addUser(userName);
-
                         socket.emit('yourUserName', userName);
                         console.log('[' + id + '] LOGGED IN AS [' + userName + ']');
                     }
@@ -91,6 +94,7 @@ class Server {
                 if (this.connections[id].userName) {
                     console.log('[' + id + '] doLogout: ' + this.connections[id].userName);
                     socket.emit('serverReport', this.connections[id].userName + ', you have been logged out!');
+                    this.game.removePlayer(this.connections[id].userName);
                     delete this.connections[id].userName;
                 }
                 else {
