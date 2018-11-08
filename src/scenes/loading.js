@@ -20,6 +20,10 @@ export default class LoadingScene extends Phaser.Scene {
     init () {
         // font loading
         this.areFontsLoaded = true;
+
+        // Catch AppMessage Input
+        this.game.appMessage = document.getElementById('app_message');
+        this.game.appMessage.addEventListener('keypress', (e) => this.handleAppMessageKey(e));
     }
 
     preload () {
@@ -48,4 +52,15 @@ export default class LoadingScene extends Phaser.Scene {
             this.scene.start('MainMenu');
         }
     }
+
+    handleAppMessageKey(e) {
+        let message = this.game.appMessage.value;
+        if (e == null)
+            return;
+        if (e.which == 13 || e.keyCode == 13 || e.charCode == 13) {
+            console.log("MESSAGE ENTERED: " + message);
+            this.game.appMessage.value = '';
+        }
+    }
+
 };
