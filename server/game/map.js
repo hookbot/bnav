@@ -16,6 +16,21 @@ class Map {
         this.mapConfigWaterLayer = null
 
         // todo: find map config wall and water layers
+        this.mapConfig.layers.forEach(layer => {
+            switch(layer.name) {
+                case 'Wall':
+                    this.mapConfigWallsLayer = layer;
+                    break;
+                case 'Water':
+                    this.mapConfigWaterLayer = layer;
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        if (this.mapConfigWallsLayer == null) throw `walls map layer not found`;
+        if (this.mapConfigWaterLayer == null) throw `walls map layer not found`;
 
         // our map
         this.map = [];
