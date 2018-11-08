@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import io from 'socket.io';
+import Game from './game';
 
 class Server {
     constructor () {
@@ -9,6 +10,8 @@ class Server {
         this.httpServer = http.Server(this.expressApp);
 
         this.webSocketServer = io.listen(this.httpServer);
+
+        this.game = new Game(this.webSocketServer);
     }
 
     initExpressApp () {
@@ -16,7 +19,7 @@ class Server {
 
         this.expressApp.get('/', (req, res) => {
             res.send({
-                message: 'I am a server route and can also be hot reloaded!'
+                message: ''
             });
         });
     }
@@ -73,6 +76,7 @@ class Server {
                             }
                         });
                         this.connections[id].userName = userName;
+                        this.game.addPlayer(userName);
                         socket.emit('yourUserName', userName);
                         console.log('[' + id + '] LOGGED IN AS [' + userName + ']');
                     }
