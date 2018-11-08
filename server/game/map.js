@@ -13,7 +13,7 @@ class Map {
 
         // aliases to specific layers of our map config
         this.mapConfigWallsLayer = null;
-        this.mapConfigWaterLayer = null
+        this.mapConfigWaterLayer = null;
 
         // find map config wall and water layers
         this.mapConfig.layers.forEach(layer => {
@@ -64,7 +64,7 @@ class Map {
 
                 this.map[index] = mapCell;
             }
-        } 
+        }
     }
 
     get width () { return this.mapConfig.width; }
