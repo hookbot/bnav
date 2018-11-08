@@ -44,3 +44,6 @@ jspm_packages
 
 # MacNTrash files
 .DS_Store
+
+# ignore lock
+package-lock.json
