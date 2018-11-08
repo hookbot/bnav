@@ -8,7 +8,7 @@ start: node_modules
 	npm start </dev/null
 
 stop:
-	killall npm webpack-serve
+	killall npm webpack-serve node
 
 start-server: node_modules
 	node server/index.js
