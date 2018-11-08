@@ -17,6 +17,9 @@ export default class PlayGameScene extends Phaser.Scene {
 
     create () {
         this.socket = io('http://localhost:8000/');
+        this.socket.on('yourID', function (arg) {
+            console.log('yourID:', arg);
+        });
     }
 
     update () {
@@ -28,6 +31,7 @@ export default class PlayGameScene extends Phaser.Scene {
             return;
         if (e.which == 13 || e.keyCode == 13 || e.charCode == 13) {
             console.log("MESSAGE ENTERED: " + message);
+            this.socket.emit('sendMessage', message);
             this.game.appMessage.value = '';
         }
     }
