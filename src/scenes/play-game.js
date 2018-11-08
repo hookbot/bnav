@@ -25,6 +25,9 @@ export default class PlayGameScene extends Phaser.Scene {
             console.log('yourUserName:', userName);
             this.userName = userName;
         });
+        this.socket.on('serverReport', function (line) {
+            console.log('serverReport', line);
+        });
     }
 
     update () {
