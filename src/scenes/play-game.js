@@ -53,14 +53,14 @@ export default class PlayGameScene extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
         this.cameras.main.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
 
-        let dashboard = this.add.container();
+        let dashboard = this.add.container(0, 400);
         var rect = new Phaser.Geom.Rectangle(0, 0, 400, 200);
 
-        var graphics = this.add.graphics({ fillStyle: { color: 0x0000ff } });
+        var graphics = this.add.graphics({ fillStyle: { color: 0xFFD733 } });
 
         graphics.fillRectShape(rect);
         dashboard.add(graphics);
-        dashboard.add(this.add.image(50, 150, 'turn_arrows', 'clockwise_turn').setScale(2));
+        dashboard.add(this.add.image(50, 150, 'turn_arrows', 'clockwise_turn').setScale(2).setInteractive().on('pointerdown', () => this.handleDashboardButton('clockwise') ));
         dashboard.add(this.add.image(90, 150, 'turn_arrows', 'counter_clockwise_turn').setScale(2));
         dashboard.add(this.add.image(130, 150, 'move_arrows', 'left_arrow').setScale(2));
         dashboard.add(this.add.image(170, 150, 'move_arrows', 'up_arrow').setScale(2));
@@ -70,6 +70,10 @@ export default class PlayGameScene extends Phaser.Scene {
     }
 
     update () {
+    }
+
+    handleDashboardButton (buttonType) {
+        console.log(buttonType);
     }
 
     handleAppMessageKey(e) {
