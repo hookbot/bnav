@@ -1,3 +1,10 @@
+import Server from './server';
+
+let server = new Server();
+
+server.start();
+
+/*
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -28,3 +35,4 @@ io.on('connection', function (socket) {
 server.listen(8000, function () {
     console.log(`Listening on ${server.address().port}`);
 });
+*/
