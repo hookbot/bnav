@@ -6,7 +6,7 @@
     "map": {
         "tilesets": [
             {
-                "key": "tileset",
+                "key": "Rob_Tileset",
                 "file": "Rob_Tileset.png"
             }
         ],
