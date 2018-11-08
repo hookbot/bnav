@@ -70,18 +70,34 @@ export default class PlayGameScene extends Phaser.Scene {
         graphics.fillRectShape(rect);
         dashboard.add(graphics);
 
-        dashboard.add(this.add.image(50, 150, 'turn_arrows', 'clockwise_turn').setScale(2).setInteractive().on('pointerdown', () => this.handleDashboardButton('clockwise') ));
-        dashboard.add(this.add.image(90, 150, 'turn_arrows', 'counter_clockwise_turn').setScale(2));
-        dashboard.add(this.add.image(130, 150, 'move_arrows', 'left_arrow').setScale(2));
-        dashboard.add(this.add.image(170, 150, 'move_arrows', 'up_arrow').setScale(2));
-        dashboard.add(this.add.image(210, 150, 'move_arrows', 'down_arrow').setScale(2));
-        dashboard.add(this.add.image(250, 150, 'move_arrows', 'right_arrow').setScale(2));
-        
+        let possibleActions = [ 
+            { 'spriteSheet': 'turn_arrows', 'buttonName': 'clockwise_turn', 'x': 50, 'y': 150 },
+            { 'spriteSheet': 'turn_arrows', 'buttonName': 'counter_clockwise_turn', 'x': 90, 'y': 150 },
+            { 'spriteSheet': 'move_arrows', 'buttonName': 'left_arrow', 'x': 130, 'y': 150 },
+            { 'spriteSheet': 'move_arrows', 'buttonName': 'up_arrow', 'x': 170, 'y': 150 },
+            { 'spriteSheet': 'move_arrows', 'buttonName': 'down_arrow', 'x': 210, 'y': 150 },
+            { 'spriteSheet': 'move_arrows', 'buttonName': 'right_arrow', 'x': 250, 'y': 150 }
+        ];
+
+        possibleActions.forEach((element) => {
+            dashboard.add(this.add.image(element.x, element.y, element.spriteSheet, element.buttonName).setScale(2).setInteractive().on('pointerdown', () => this.handleDashboardButton(element.buttonName) ));
+        });
+
         dashboard.setSize(400, 200);
 
+        let n=0;
         for (let i=0; i<4; i++) {
-            dashboard.add(this.add.image(300, 30 + 40 * i, 'brownBox').setInteractive().on('pointerdown', () => this.handleActionQueue(i)));
-            dashboard.add(this.add.image(340, 30 + 40 * i, 'brownBox').setInteractive().on('pointerdown', () => this.handleActionQueue(i*2)));
+            let brownBox = this.add.image(300, 30 + 40 * i, 'brownBox').setInteractive();
+            brownBox.id = n;
+            brownBox.on('pointerdown', () => this.handleActionQueue(brownBox));
+            n++;
+            dashboard.add(brownBox);
+
+            brownBox = this.add.image(340, 30 + 40 * i, 'brownBox').setInteractive();
+            brownBox.id = n;
+            brownBox.on('pointerdown', () => this.handleActionQueue(brownBox));
+            n++;
+            dashboard.add(brownBox);
         }
 
     }
@@ -100,7 +116,8 @@ export default class PlayGameScene extends Phaser.Scene {
     }
 
     handleActionQueue(actionLocation) {
-        this.game.actionQueue[actionLocation] = this.game.activeButton;
+        console.log(actionLocation.id);
+        this.game.actionQueue[actionLocation.id] = this.game.activeButton;
         console.log(this.game.actionQueue);
     }
 
