@@ -78,7 +78,10 @@ export default class PlayGameScene extends Phaser.Scene {
         
         dashboard.setSize(400, 200);
 
-        dashboard.add(this.add.image(300, 50, 'brownBox').setInteractive().on('pointerdown', () => this.handleActionQueue(0)));
+        for (let i=0; i<4; i++) {
+            dashboard.add(this.add.image(300, 30 + 40 * i, 'brownBox').setInteractive().on('pointerdown', () => this.handleActionQueue(i)));
+            dashboard.add(this.add.image(340, 30 + 40 * i, 'brownBox').setInteractive().on('pointerdown', () => this.handleActionQueue(i*2)));
+        }
 
     }
 
