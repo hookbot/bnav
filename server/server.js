@@ -59,7 +59,7 @@ class Server {
                     else {
                         this.connections[id].userName = userName;
                         socket.emit('yourUserName', userName);
-                        console.log('[' + id + '] LOGGED IN AS [ ' + userName + ']');
+                        console.log('[' + id + '] LOGGED IN AS [' + userName + ']');
                     }
                 }
             });
