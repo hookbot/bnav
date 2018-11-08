@@ -26,6 +26,7 @@ export default class PlayGameScene extends Phaser.Scene {
         // Catch ServerStatus
         this.game.serverStatus = document.getElementById('server_status');
         this.game.actionQueue = [];
+        this.cameras.main.zoom = 3;
     }
 
     create () {
