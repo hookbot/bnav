@@ -22,8 +22,10 @@ export default class PlayGameScene extends Phaser.Scene {
         // Catch AppMessage Input
         this.game.appMessage = document.getElementById('app_message');
         this.game.appMessage.addEventListener('keypress', (e) => this.handleAppMessageKey(e));
+        this.game.appMessage.style.display = 'block';
         // Catch ServerStatus
         this.game.serverStatus = document.getElementById('server_status');
+        this.game.serverStatus.style.display = 'block';
         this.cameras.main.zoom = 3;
     }
 
