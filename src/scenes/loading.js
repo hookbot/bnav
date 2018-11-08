@@ -21,7 +21,7 @@ require('../../assets/images/redboy.png');
 require('../../assets/json/redboy.json');
 require('../../assets/images/shield.png');
 require('../../assets/json/shield.json');
-require('../../assets/images/brownbox.png');
+require('../../assets/images/brown_box.png');
 
 export default class LoadingScene extends Phaser.Scene {
     constructor (config, key = 'Loading') {
