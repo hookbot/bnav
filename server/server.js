@@ -22,11 +22,24 @@ class Server {
     }
 
     initWebSocketServer () {
-        this.webSocketServer.on('connection', function (socket) {
-            console.log('a user connected');
+        this.connections = {};
+
+        this.webSocketServer.on('connection', (socket) => {
+            let id = socket.conn.id;
+            console.log('[' + id + '] User connected!');
+
+            this.connections[id] = { socket: socket };
+
             socket.on('disconnect', () => {
-              console.log('user disconnected');
+                console.log('[' + id + '] User disconnected!');
+                delete this.connections[id];
             });
+
+            socket.on('sendMessage', (message) => {
+                console.log('[' + id + '] sendMessage: ' + message);
+            });
+
+            socket.emit('yourID', id);
         });
     }
 
