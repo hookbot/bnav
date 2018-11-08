@@ -30,6 +30,24 @@ export default class PlayGameScene extends Phaser.Scene {
         this.socket.on('serverReport', function (line) {
             console.log('serverReport', line);
         });
+
+        this.setupMap();
+    }
+
+    setupMap () {
+        this.tilemap = this.make.tilemap({ key: 'map' });
+        this.tilesets = {};
+        gameConfig.map.tilesets.forEach(tileset => {
+            this.tilesets[tileset.key] = this.tileMap.addTilesetImage(tileset.key);
+        });
+
+        this.tileLayers = {};
+        gameConfig.map.tileLayers.forEach(layer => {
+            this.tileLayers[layer.name] = this.tileMap.createDynamicLayer(layer.name, this.tilesets[layer.tileset], 0, 0);
+        });
+
+        this.physics.world.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
+        this.cameras.main.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
     }
 
     update () {
