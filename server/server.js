@@ -78,7 +78,9 @@ class Server {
                             }
                         });
                         this.connections[id].userName = userName;
-                        this.game.addPlayer(userName);
+
+                        this.game.addUser(userName);
+
                         socket.emit('yourUserName', userName);
                         console.log('[' + id + '] LOGGED IN AS [' + userName + ']');
                     }
