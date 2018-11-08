@@ -25,6 +25,8 @@ class Game {
     removeUser (userName) {
         if (this.users[userName]) {
             console.log(`REMOVING USER ${userName} FROM GAME ...`);
+            let user = this.users[userName];
+            this.map.removeUserFromMap(user);
             delete this.users[userName];
         }
     }

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import testMap from '../../assets/json/test-map.json';
 
 import MapCell from './map-cell';
@@ -107,6 +108,12 @@ class Map {
         this.players.push(player);
 
         user.player = player;
+    }
+
+    removeUserFromMap (user) {
+        _.remove(this.players, (u) => {
+            return u.userName == user.userName;
+        });
     }
 }
 
