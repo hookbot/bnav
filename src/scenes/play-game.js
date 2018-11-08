@@ -13,6 +13,8 @@ export default class PlayGameScene extends Phaser.Scene {
     preload () {
         this.load.tilemapTiledJSON('map', 'test-map.json');
         this.load.image('Rob_Tileset', 'Rob_Tileset.png');
+        this.load.atlas('blueboy', 'blueboy.png', 'blueboy.json');
+        this.load.atlas('redboy', 'redboy.png', 'redboy.json');
         // load all the resources required for this scene before using them
     }
 
@@ -35,6 +37,7 @@ export default class PlayGameScene extends Phaser.Scene {
             console.log('yourUserName:', userName);
             this.userName = userName;
             this.appendServerStatus('You are logged in as: ' + userName);
+            
         });
         this.socket.on('serverReport', (line) => {
             console.log('SERVER: ' + line);
@@ -46,8 +49,8 @@ export default class PlayGameScene extends Phaser.Scene {
 
         this.setupMap();
 
-        this.playerSelf = new PlayerSelf(this, 100, 100);
-        this.add.existing(this.playerSelf);
+        this.playerSelf = this.add.existing(new PlayerSelf(this, 300, 230));
+        console.log(this.playerSelf);
     }
 
     setupMap () {
@@ -64,8 +67,6 @@ export default class PlayGameScene extends Phaser.Scene {
 
         this.physics.world.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
         this.cameras.main.setBounds(0, 0, this.tilemap.widthInPixels, this.tilemap.heightInPixels);
-
-
     }
 
     update () {
