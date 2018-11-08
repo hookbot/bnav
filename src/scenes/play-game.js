@@ -57,10 +57,25 @@ export default class PlayGameScene extends Phaser.Scene {
         let message = this.game.appMessage.value;
         if (e == null)
             return;
+        if (message == '')
+            return;
         if (e.which == 13 || e.keyCode == 13 || e.charCode == 13) {
-            console.log("MESSAGE ENTERED: " + message);
-            this.socket.emit('sendMessage', message);
+            var contents = message.split(" ");
             this.game.appMessage.value = '';
+            if (contents[0] == '/login') {
+                this.game.appMessage.value = '';
+                console.log("LOGIN AS USER: " + contents[1]);
+                this.socket.emit('doLogin', contents[1]);
+            }
+            else if (contents[0].substr(0,1) == '/') {
+                console.log("Unknown command: " + contents[0]);
+                this.game.appMessage.value = message;
+            }
+            else {
+                // Send message to server.
+                console.log("MESSAGE: " + message);
+                this.socket.emit('sendMessage', message);
+            }
         }
     }
 };

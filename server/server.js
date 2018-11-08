@@ -13,7 +13,7 @@ class Server {
 
     initExpressApp () {
         this.expressApp.use(express.static(__dirname + '/public'));
- 
+
         this.expressApp.get('/', (req, res) => {
             res.send({
                 message: 'I am a server route and can also be hot reloaded!'
@@ -37,6 +37,31 @@ class Server {
 
             socket.on('sendMessage', (message) => {
                 console.log('[' + id + '] sendMessage: ' + message);
+            });
+
+            socket.on('doLogin', (userName) => {
+                console.log('[' + id + '] doLogin: ' + userName);
+                if (this.connections[id].userName) {
+                    console.log('[' + this.connections[id].userName + '] Ignoring relogin attempt as ' + userName);
+                    socket.emit('serverReport', 'You are already logged in as ' + this.connections[id].userName);
+                }
+                else {
+                    let taken = 0;
+                    Object.values(this.connections).forEach((c) => {
+                        if (c.userName &&
+                            c.userName == userName) {
+                            taken = 1;
+                        }
+                    });
+                    if (taken) {
+                        socket.emit('serverReport', 'Sorry, that username is already taken');
+                    }
+                    else {
+                        this.connections[id].userName = userName;
+                        socket.emit('yourUserName', userName);
+                        console.log('[' + id + '] LOGGED IN AS [ ' + userName + ']');
+                    }
+                }
             });
 
             socket.emit('yourID', id);
