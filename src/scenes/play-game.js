@@ -21,6 +21,10 @@ export default class PlayGameScene extends Phaser.Scene {
             console.log('yourID:', playerID);
             this.playerID = playerID;
         });
+        this.socket.on('yourUserName', function (userName) {
+            console.log('yourUserName:', userName);
+            this.userName = userName;
+        });
     }
 
     update () {
