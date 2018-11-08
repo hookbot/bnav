@@ -15,6 +15,12 @@ require('../../assets/images/move_arrows.png');
 require('../../assets/json/move_arrows.json');
 require('../../assets/images/turn_arrows.png');
 require('../../assets/json/turn_arrows.json');
+require('../../assets/images/blueboy.png');
+require('../../assets/json/blueboy.json');
+require('../../assets/images/redboy.png');
+require('../../assets/json/redboy.json');
+require('../../assets/images/shield.png');
+require('../../assets/json/shield.json');
 
 export default class LoadingScene extends Phaser.Scene {
     constructor (config, key = 'Loading') {
