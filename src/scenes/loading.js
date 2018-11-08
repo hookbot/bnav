@@ -8,8 +8,8 @@
 
 // require in other assets to be included but not added to cache at this time
 // require('../../assets/sounds/sound.wav');
-// require('../../assets/json/tilemap.json');
-// require('../../assets/images/tileset.png');
+require('../../assets/json/test-map.json');
+require('../../assets/images/Rob_Tileset.png');
 require('../../assets/images/play.png');
 
 export default class LoadingScene extends Phaser.Scene {
