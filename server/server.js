@@ -36,9 +36,16 @@ class Server {
             socket.on('disconnect', () => {
                 console.log('[' + id + '] User disconnected!');
                 if (this.connections[id].userName) {
-                    console.log('[' + id + '] DISCONNECT: ' + this.connections[id].userName);
-                    this.game.removeUser(this.connections[id].userName);
+                    let userName = this.connections[id].userName;
+                    console.log('[' + id + '] DISCONNECTED: ' + userName);
+                    this.game.removeUser(userName);
                     delete this.connections[id].userName;
+                    // Don't attempt to emit() to this disconnected client
+                    Object.values(this.connections).forEach((c) => {
+                        if (c.userName) {
+                            c.socket.emit('serverReport', 'LOGGED OUT: ' + userName);
+                        }
+                    });
                 }
                 delete this.connections[id];
             });
@@ -77,24 +84,30 @@ class Server {
                         socket.emit('serverReport', 'Sorry, that username is already taken');
                     }
                     else {
-                        Object.values(this.connections).forEach((c) => {
-                            if (c.userName) {
-                                c.socket.emit('serverReport', userName + ' just logged in! Welcome!');
-                            }
-                        });
                         this.connections[id].userName = userName;
                         this.game.addUser(userName);
                         socket.emit('yourUserName', userName);
                         console.log('[' + id + '] LOGGED IN AS [' + userName + ']');
+                        Object.values(this.connections).forEach((c) => {
+                            if (c.userName) {
+                                c.socket.emit('serverReport', 'LOGGED IN: ' + userName);
+                            }
+                        });
                     }
                 }
             });
 
             socket.on('doLogout', () => {
                 if (this.connections[id].userName) {
-                    console.log('[' + id + '] doLogout: ' + this.connections[id].userName);
-                    socket.emit('serverReport', this.connections[id].userName + ', you have been logged out!');
-                    this.game.removeUser(this.connections[id].userName);
+                    let userName = this.connections[id].userName;
+                    console.log('[' + id + '] doLogout: ' + userName);
+                    Object.values(this.connections).forEach((c) => {
+                        if (c.userName) {
+                            c.socket.emit('serverReport', 'LOGGED OUT: ' + userName);
+                        }
+                    });
+                    socket.emit('serverReport', 'You have been logged out!');
+                    this.game.removeUser(userName);
                     delete this.connections[id].userName;
                 }
                 else {
