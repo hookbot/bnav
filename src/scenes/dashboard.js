@@ -55,11 +55,11 @@ export default class DashboardScene extends Phaser.Scene {
             n++;
             dashboard.add(brownBox);
 
-            brownBox = this.add.image(340, 30 + 40 * i, 'brownBox').setInteractive();
-            brownBox.id = n;
-            brownBox.on('pointerdown', () => this.handleActionQueue(brownBox));
+            let brownBox2 = this.add.image(340, 30 + 40 * i, 'brownBox').setInteractive();
+            brownBox2.id = n;
+            brownBox2.on('pointerdown', () => this.handleActionQueue(brownBox2));
             n++;
-            dashboard.add(brownBox);
+            dashboard.add(brownBox2);
         }
     }
 
