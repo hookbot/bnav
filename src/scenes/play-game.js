@@ -30,7 +30,13 @@ export default class PlayGameScene extends Phaser.Scene {
     }
 
     create () {
-        this.socket = io('http://localhost:8000/');
+        let wsBase = 'ws://localhost:8000/';
+        if (document.location.port < 1024) {
+            // Privileged port should use itself for WebSocket
+            wsBase = document.location.href;
+        }
+        console.log("USING WEBSOCKET: " + wsBase);
+        this.socket = io(wsBase);
         this.socket.on('yourID', (playerID) => {
             console.log('yourID:', playerID);
             this.playerID = playerID;
@@ -39,7 +45,6 @@ export default class PlayGameScene extends Phaser.Scene {
             console.log('yourUserName:', userName);
             this.userName = userName;
             this.appendServerStatus('You are logged in as: ' + userName);
-            
         });
         this.socket.on('serverReport', (line) => {
             console.log('SERVER: ' + line);
