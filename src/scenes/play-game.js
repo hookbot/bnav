@@ -40,6 +40,11 @@ export default class PlayGameScene extends Phaser.Scene {
         this.socket.on('yourID', (playerID) => {
             console.log('yourID:', playerID);
             this.playerID = playerID;
+            if (this.userName) {
+                let prev = this.userName;
+                delete this.userName;
+                this.socket.emit('doLogin', prev);
+            }
         });
         this.socket.on('yourUserName', (userName) => {
             console.log('yourUserName:', userName);
