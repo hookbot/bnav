@@ -43,6 +43,7 @@ export default class PlayGameScene extends Phaser.Scene {
             if (this.userName) {
                 let prev = this.userName;
                 delete this.userName;
+                this.appendServerStatus('You have been disconnected by the server.');
                 this.socket.emit('doLogin', prev);
             }
         });
