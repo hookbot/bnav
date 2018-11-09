@@ -19,12 +19,12 @@ class Game {
 
         this.map.addNewUserToMap(user);
         this.users[userName] = new User(userName);
-        console.log(`ADDING USER ${userName} TO GAME ...`);
+        //console.log(`ADDING USER ${userName} TO GAME ...`);
     }
 
     removeUser (userName) {
         if (this.users[userName]) {
-            console.log(`REMOVING USER ${userName} FROM GAME ...`);
+            //console.log(`REMOVING USER ${userName} FROM GAME ...`);
             let user = this.users[userName];
             this.map.removeUserFromMap(user);
             delete this.users[userName];

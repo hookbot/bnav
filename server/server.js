@@ -28,10 +28,17 @@ class Server {
         this.connections = {};
 
         this.webSocketServer.on('connection', (socket) => {
+            let address = socket.handshake.address;
+            if (address == '127.0.0.1' || address == '::ffff:127.0.0.1' || address == '::1')
+                if (socket.handshake.headers['x-forwarded-for'])
+                    address = socket.handshake.headers['x-forwarded-for'];
             let id = socket.conn.id;
-            console.log('[' + id + '] User connected!');
+            console.log('[' + id + '] User connected from [' + address + ']');
 
-            this.connections[id] = { socket: socket };
+            this.connections[id] = {
+                socket: socket,
+                remote_addr: address
+            };
 
             socket.on('disconnect', () => {
                 console.log('[' + id + '] User disconnected!');
