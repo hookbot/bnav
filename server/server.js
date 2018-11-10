@@ -91,6 +91,11 @@ class Server {
                         socket.emit('serverReport', 'Sorry, that username is already taken');
                     }
                     else {
+                        Object.values(this.connections).forEach((c) => {
+                            if (c.userName) {
+                                socket.emit('serverReport', 'LOGGED IN: ' + c.userName);
+                            }
+                        });
                         this.connections[id].userName = userName;
                         this.game.addUser(userName);
                         socket.emit('yourUserName', userName);
